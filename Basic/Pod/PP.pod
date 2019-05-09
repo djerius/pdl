@@ -2021,6 +2021,11 @@ also the same entry in L<Appendix B|/Appendix B: PP macros and functions>.
 the actual code that implements the functionality; several PP macros and
 PP functions are recognised in the string value
 
+=item Comp
+
+Set to C code which declares additional variables to be added to the trans
+structure. Code may include PP macros (e.g. C<< $COMP >>).
+
 =item HandleBad (bad)
 
 If set to 1, the routine is assumed to support bad values and the code in
@@ -2169,6 +2174,11 @@ access a pdl (by its name) that was specified in the signature
 
 access a value in the private data structure of this transformation (mainly
 used to use an argument that is specified in the C<OtherPars> section)
+
+=item $DOCOMPDIMS()
+
+Allocates space for C<< $COMP >> items which require it.
+See L<PDL::PP::Rule::MakeComp>.
 
 =item $SIZE(n)
 
@@ -2482,9 +2492,6 @@ $COPYINDS()
 $CROAK()
     PDL::PP::Rule::Substitute::dosubst_private()
 
-$DOCOMPDIMS()
-    Used in slices.pd, defined where?
-
 $DOPRIVDIMS()
     Used in slices.pd, defined where?
     Code comes from PDL::PP::CType::get_malloc, which is called by PDL::PP::CType::get_copy, which is called by PDL::PP::CopyOtherPars, PDL::PP::NT2Copies__, and PDL::PP::make_incsize_copy.  But none of those three at first glance seem to have anything to do with $DOPRIVDIMS
@@ -2532,8 +2539,6 @@ BackCode
 BadBackCode
 
 CallCopy
-
-Comp (related to $COMP()?)
 
 DefaultFlow
 
